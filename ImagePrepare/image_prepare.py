@@ -9,6 +9,7 @@ from skimage import io
 from acvl_utils.morphology.morphology_helper import generic_filter_components
 from scipy.ndimage import binary_fill_holes
 
+from path import get_root_path, get_generated_dataset_path
 
 def load_and_covnert_case(input_image: str, input_seg: str, output_image: str, output_seg: str,
                           min_component_size: int = 50):
@@ -47,17 +48,6 @@ def load_and_covnert_case1():
         new_seg[mask] = 0
         io.imsave(join(output_dir, f'{index:03d}.png'), new_seg, check_contrast=False)
     # shutil.copy(input_image, output_image)
-
-def get_root_path():
-    # 获取当前py文件的绝对路径
-    cur_path = os.path.dirname(os.path.realpath(__file__))
-    # 获取父目录
-    root_path = os.path.dirname(cur_path)
-    return root_path
-
-def get_generated_dataset_path(generated_name):
-    dataset_path = os.path.join(get_root_path(), 'Dataset', 'generated')
-    return os.path.join(dataset_path, generated_name)
 
 
 def get_origin_dataset_path(original_name):
@@ -134,7 +124,7 @@ def main_func():
         #     )
         _ = [i.get() for i in r]
 
-    generate_dataset_json(generated_path, {0: 'Grey'}, {'background': 0, 'bug': 255},
+    generate_dataset_json(generated_path, {0: 'Grey'}, {'background': 0, 'bug': 1},
                           num_train, '.png', dataset_name=generated_path)
 
 
