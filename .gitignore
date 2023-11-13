@@ -2,3 +2,4 @@
 Dataset/generated
 Dataset/preprocess
 Dataset/result
+*.pyc

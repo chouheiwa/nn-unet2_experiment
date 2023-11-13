@@ -19,6 +19,10 @@ def get_dataset_path(name: str = None):
     return join_path(os.path.join(get_root_path(), 'Dataset'), name)
 
 
+def get_original_dataset_path(generated_name: str = None):
+    return join_path(get_dataset_path('original'), generated_name)
+
+
 def get_generated_dataset_path(generated_name: str = None):
     return join_path(get_dataset_path('generated'), generated_name)
 
