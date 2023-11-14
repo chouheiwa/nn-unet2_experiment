@@ -9,6 +9,7 @@ def setup_env():
     os.environ['nnUNet_raw'] = get_generated_dataset_path()
     os.environ['nnUNet_preprocessed'] = get_preprocess_path()
     os.environ['nnUNet_results'] = get_result_path()
+    os.environ['nnUNet_visual_port'] = '6666'
 
 
 def pre_process_database():
@@ -66,14 +67,14 @@ def train():
     c = False  # 这是默认值
     val = False  # 这是默认值
     disable_checkpointing = False  # 这是默认值
-    device_arg = 'cuda'  # 从命令行参数中提取
+    device_arg = 'mps'  # 从命令行参数中提取
     # 根据提供的-device参数设置设备
     if device_arg == 'cuda':
         # 设置为使用 GPU
         torch.set_num_threads(1)
         torch.set_num_interop_threads(1)
         device = torch.device('cuda')
-    elif device_arg == 'cpu':
+    elif device_arg == 'mps':
         # 设置为使用 CPU
         device = torch.device('cpu')
     else:
@@ -101,6 +102,6 @@ def train():
 if __name__ == '__main__':
     setup_env()
     # pre_process_database()
-    # train()
-    print(torch.__version__)
+    train()
+    # print(torch.__version__)
     # print(torch.cuda.is_available())
